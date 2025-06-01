@@ -1,0 +1,5 @@
+import pygame as pg
+
+CAPTION = "TIC TAC TOE"
+SCREEN_SIZE = (1000, 600)
+TARGET_FPS = 60.0
