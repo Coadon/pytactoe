@@ -1,7 +1,7 @@
 import pygame as pg
 from scene import Scene
-from scenes.test_a import ScTestA
-from scenes.test_b import ScTestB
+from scenes.game import ScGame
+from scenes.main_menu import ScMainMenu
 from constants import TARGET_FPS, CAPTION
 
 
@@ -18,10 +18,10 @@ class Control:
         self.should_stop = False
         self.clock = pg.time.Clock()
         self.scene_dict: dict[str, Scene] = {
-            "TEST_A": ScTestA(),
-            "TEST_B": ScTestB()
+            "MAIN_MENU": ScMainMenu(),
+            "GAME": ScGame(),
         }
-        self.scene: Scene = self.scene_dict["SWITCH"]
+        self.scene: Scene = self.scene_dict["MAIN_MENU"]
 
     def event_loop(self):
         for event in pg.event.get():
@@ -30,7 +30,6 @@ class Control:
             self.scene.call_event(event)
 
     def update(self):
-        self.scene.update()
         if self.scene.next_scene:
             self.scene.active = False
             self.scene.reset()
@@ -40,6 +39,7 @@ class Control:
         if not self.scene.active:
             self.scene.start()
             self.scene.active = True
+        self.scene.update()
 
     def draw(self, dt):
         if self.scene.active:
