@@ -4,6 +4,7 @@ from control import Control
 from constants import CAPTION, SCREEN_SIZE
 from gfx.board import Board
 from gfx.fonts import setup_fonts
+import histo
 
 Vec2 = tuple[float, float]
 
@@ -14,7 +15,9 @@ def main():
     pg.display.set_mode(SCREEN_SIZE)
     setup_fonts()
     Board.load_images()
+    histo.start()
     Control().main_loop()
+    histo.close()
     pg.quit()
     sys.exit()
 

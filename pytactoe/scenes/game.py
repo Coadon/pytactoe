@@ -11,7 +11,7 @@ import pygame as pg
 
 
 class ScGame(Scene):
-    start_timed = False
+    # start_timed = False
 
     def __init__(self) -> None:
         super().__init__()
@@ -23,9 +23,9 @@ class ScGame(Scene):
 
         self.top_text = Text((SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] // 2 - 250), "Spare", font("MID"), pg.Color(0, 0, 0))
 
-        self.reset_btn = TextButton((SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] // 2 + 250), (200, 30), "Reset Round", font("MID"), pg.Color(0, 0, 0), on_click=self.new_round)
+        self.reset_btn = TextButton((SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] // 2 + 250), (200, 30), "Reset", font("MID"), pg.Color(0, 0, 0), on_click=self.new_round)
 
-        self.abandon_btn = TextButton((100, SCREEN_SIZE[1] - 10), (200, 30), "Abandon Game", font("SMALL"), pg.Color(0, 0, 0), on_click=self.abandon_game)
+        self.abandon_btn = TextButton((80, SCREEN_SIZE[1] - 10), (200, 30), "Abandon Game", font("SMALL"), pg.Color(0, 0, 0), on_click=self.abandon_game)
 
         self.score_x_text = Text((SCREEN_SIZE[0] // 2 - 300, SCREEN_SIZE[1] // 2 - 250), "", font("BIG"), pg.Color(0, 0, 0))
         self.score_o_text = Text((SCREEN_SIZE[0] // 2 + 300, SCREEN_SIZE[1] // 2 - 250), "", font("BIG"), pg.Color(0, 0, 0))
@@ -33,8 +33,8 @@ class ScGame(Scene):
         self.timer_o_text = Text((SCREEN_SIZE[0] // 2 + 300, SCREEN_SIZE[1] // 2 - 200), "", font("MID"), pg.Color(0, 0, 0))
         self.match_status_text = Text((SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] // 2 + 280), "", font("MID"), pg.Color(0, 0, 0))
 
-    def start(self):
-        self.match = Match(use=ScGame.start_timed)
+    def start(self, **kwargs):
+        self.match = Match(use=kwargs["start_timed"])
         self.abandon_btn.text = "Abandon Game" if self.match.use else "Leave"
         self.abandon_btn.update_property()
         self.new_round()

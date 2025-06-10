@@ -1,9 +1,13 @@
 from constants import EX, OH, RoundResult
+from histo import RoundRecord
 from match import Match
+import histo
 
 
 class Round():
     def __init__(self, match: Match, x_starts: bool = True):
+        self.record = RoundRecord("X" if x_starts else "O")
+
         self.round_over = False
         self.result = RoundResult.Undetermined
         self.won_on_time = False
@@ -16,6 +20,9 @@ class Round():
         self.round_over = True
         self.result = result
         self.won_on_time = on_time
+
+        self.record.conclude(result, on_time)
+        histo.add_round(self.record)
 
         if not self.match.use:
             return
@@ -66,6 +73,7 @@ class Round():
         self.first_move = False
         self.grid[square[0]][square[1]] = EX if self.x_turn else OH
         self.x_turn = not self.x_turn
+        self.record.add_move(square)
         if not self.test_for_win():
             if self.test_for_full_grid():
                 self.conclude(RoundResult.Draw)

@@ -5,9 +5,10 @@ import pygame as pg
 class Scene(ABC):
     def __init__(self) -> None:
         self.active: bool = False
+        self.next_scene_args: dict[str, object] = {}
         self.next_scene = None
 
-    def start(self):
+    def start(self, *args, **kwargs):
         pass
 
     def reset(self):
