@@ -40,12 +40,17 @@ class Board(Drawable):
 
         self.grid_boxes_oh: list[list[SurfRect]] = []
         self.grid_boxes_ex: list[list[SurfRect]] = []
+        self.grid_buttons: list[list[GridButton]] = []
         self.pos = pos
         self.wall_color = pg.Color(0, 0, 0)
         self.on_grid_click = on_grid_click
-        self.grid_buttons = None
         self.TOP_LEFT_POS = None
         self.update_transform()
+
+    def debounce_buttons(self):
+        for x in range(3):
+            for y in range(3):
+                self.grid_buttons[x][y].was_clicked = True
 
     def update_transform(self) -> None:
         self.TOP_LEFT_POS = [[(self.pos[0] + x * SQUARE_LEN, self.pos[1] + y * SQUARE_LEN) for y in range(3)] for x in

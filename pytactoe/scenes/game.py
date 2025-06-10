@@ -37,6 +37,7 @@ class ScGame(Scene):
         self.match = Match(use=kwargs["start_timed"])
         self.abandon_btn.text = "Abandon Game" if self.match.use else "Leave"
         self.abandon_btn.update_property()
+        self.board.debounce_buttons()
         self.new_round()
         self.update_texts()
 

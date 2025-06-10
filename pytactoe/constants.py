@@ -11,6 +11,10 @@ class RoundResult:
     Undetermined, Draw, XWin, OWin = range(4)
 
 
+def result_to_str(result: RoundResult) -> str:
+    return "X WON" if result == RoundResult.XWin else "O WON" if result == RoundResult.OWin else "DREW"
+
+
 def ex(is_ex):
     """Returns the EX side if is_ex is True, otherwise returns the OH side."""
     return EX if is_ex else OH

@@ -53,13 +53,21 @@ def get_round_by_id(round_id: int):
     return cur.fetchone()
 
 
+def get_round_range(low: int, end: int):
+    cur.execute("SELECT * FROM rounds WHERE id BETWEEN ? AND ? ORDER BY id ASC", (low, end))
+    return cur.fetchall()
+
+
 def get_round_count() -> int:
-    cur.execute("SELECT COUNT(*) FROM rounds")
+    # cur.execute("SELECT COUNT(*) FROM rounds")
+    cur.execute("SELECT MAX(id) FROM rounds")
     return cur.fetchone()[0]
 
 
 def clear_history():
     cur.execute("DELETE FROM rounds")
+    cur.execute("DELETE FROM sqlite_sequence WHERE name='rounds'")
+    # cur.execute("ALTER TABLE rounds AUTO_INCREMENT = 1")
     conn.commit()
     print("Table cleared.")
 

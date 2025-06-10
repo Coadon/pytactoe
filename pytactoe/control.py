@@ -1,6 +1,7 @@
 import pygame as pg
 from scene import Scene
 from scenes.game import ScGame
+from scenes.hist_detail import ScHistDetail
 from scenes.hist_list import ScHistList
 from scenes.main_menu import ScMainMenu
 from constants import TARGET_FPS, CAPTION
@@ -21,9 +22,10 @@ class Control:
         self.scene_dict: dict[str, Scene] = {
             "MAIN_MENU": ScMainMenu(),
             "GAME": ScGame(),
-            "HIST_LIST": ScHistList()
+            "HIST_LIST": ScHistList(),
+            "HIST_DETAIL": ScHistDetail(),
         }
-        self.scene: Scene = self.scene_dict["MAIN_MENU"]  # Default scene
+        self.scene: Scene = self.scene_dict["HIST_LIST"]  # Default scene
         self.scene.start()
         self.scene.active = True
 
