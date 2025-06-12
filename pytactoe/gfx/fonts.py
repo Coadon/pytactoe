@@ -1,15 +1,18 @@
 import pygame as pg
 
+from resource import resource_path
+
 FONTS: dict[str, pg.Font] = {}
 
+DEP_MONO_PATH = resource_path("assets/DepartureMono-Regular.otf")
 
 def setup_fonts():
     global FONTS
     FONTS = {
-        "BIGGER": pg.font.SysFont("Departure Mono", 50),
-        "BIG": pg.font.SysFont("Departure Mono", 35),
-        "MID": pg.font.SysFont("Departure Mono", 25),
-        "SMALL": pg.font.SysFont("Departure Mono", 18),
+        "BIGGER": pg.font.Font(DEP_MONO_PATH, 50),
+        "BIG": pg.font.Font(DEP_MONO_PATH, 35),
+        "MID": pg.font.Font(DEP_MONO_PATH, 25),
+        "SMALL": pg.font.Font(DEP_MONO_PATH, 18),
     }
 
 

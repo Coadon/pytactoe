@@ -5,6 +5,7 @@ import pygame as pg
 from constants import EX, OH
 from gfx.drawable import Drawable, SurfRect
 from gfx.button import GridButton
+from resource import resource_path
 
 SQUARE_LEN = 133
 BOARD_LEN = 400
@@ -28,8 +29,8 @@ class Board(Drawable):
 
     @staticmethod
     def load_images():
-        Board.image_x = pg.image.load("assets/graphic_ex.png")
-        Board.image_o = pg.image.load("assets/graphic_oh.png")
+        Board.image_x = pg.image.load(resource_path("assets/graphic_ex.png"))
+        Board.image_o = pg.image.load(resource_path("assets/graphic_oh.png"))
 
     @staticmethod
     def create_grid(create_func):

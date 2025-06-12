@@ -8,7 +8,7 @@ from gfx.button import TextButton
 from constants import SCREEN_SIZE, to_number, RoundResult, EX
 from gfx.fonts import font
 
-ROWS_PER_PAGE = 15
+ROWS_PER_PAGE = 10
 
 
 class HistRow(Drawable):
@@ -28,7 +28,7 @@ class HistRow(Drawable):
         self.won_on_time_text = font("SMALL").render("Yes" if won_on_time else "No", True, (0, 0, 0))
 
         # Button for details
-        self.details_button = TextButton((900, y_pos + 15),
+        self.details_button = TextButton((900, y_pos + 20),
                                          (100, 30),
                                          "Details",
                                          font("SMALL"),
@@ -41,13 +41,13 @@ class HistRow(Drawable):
 
     def update_draw(self, screen: pg.Surface):
         # Draw background
-        pg.draw.rect(screen, self.bg_color, (0, self.y_pos, SCREEN_SIZE[0], 30))
+        pg.draw.rect(screen, self.bg_color, (0, self.y_pos, SCREEN_SIZE[0], 40))
 
         # Draw text elements
-        screen.blit(self.date_text, (10, self.y_pos + 5))
-        screen.blit(self.starting_side_text, (350, self.y_pos + 5))
-        screen.blit(self.winner_text, (500, self.y_pos + 5))
-        screen.blit(self.won_on_time_text, (650, self.y_pos + 5))
+        screen.blit(self.date_text, (10, self.y_pos + 10))
+        screen.blit(self.starting_side_text, (350, self.y_pos + 10))
+        screen.blit(self.winner_text, (500, self.y_pos + 10))
+        screen.blit(self.won_on_time_text, (650, self.y_pos + 10))
 
         # Draw the details button
         self.details_button.update_draw(screen)
@@ -112,8 +112,8 @@ class ScHistList(Scene):
     def update_rows(self):
         self.ui_rows.clear()
         self.page_ind.text = f"{str(self.page_now)}/{str(self.page_num)}"
-        start = (self.page_now - 1) * ROWS_PER_PAGE
-        end = start + ROWS_PER_PAGE
+        start = (self.page_now - 1) * ROWS_PER_PAGE + 1
+        end = start + ROWS_PER_PAGE - 1
         row_data = histo.get_round_range(start, end)
         print(start, end)
         print(row_data)
@@ -123,7 +123,7 @@ class ScHistList(Scene):
             row_id, row_rec, win_state_encoding, date = row
             winner, won_on_time = histo.deserialize_round_result(win_state_encoding)
             self.ui_rows.append(HistRow(
-                100 + i * 30,  # Use the index `i` for positioning
+                100 + i * 40,  # Use the index `i` for positioning
                 odd,
                 date,
                 row_rec[0],

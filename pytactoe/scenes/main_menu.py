@@ -1,3 +1,4 @@
+import webbrowser
 import pygame as pg
 from scene import Scene
 from gfx.button import TextButton
@@ -19,8 +20,12 @@ class ScMainMenu(Scene):
                                           on_click=self.cut_to_casual_game)
 
         self.btn_history = TextButton((SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] // 2 + 140), (300, 30),
-                                          "History", font("MID"), pg.Color(0, 0, 0),
-                                          on_click=self.cut_to_history)
+                                      "History", font("MID"), pg.Color(0, 0, 0),
+                                      on_click=self.cut_to_history)
+
+        self.source_link = TextButton((SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] - 20), (500, 20),
+                                      "Released under the MIT License", font("SMALL"), pg.Color(0, 0, 0),
+                                      on_click=lambda: webbrowser.open("https://github.com/Coadon/pytactoe/"))
 
     def cut_to_timed_game(self):
         self.next_scene_args = {"start_timed": True}
@@ -39,3 +44,4 @@ class ScMainMenu(Scene):
         self.btn_timed_game.update_draw(screen)
         self.btn_casual_game.update_draw(screen)
         self.btn_history.update_draw(screen)
+        self.source_link.update_draw(screen)

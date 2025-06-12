@@ -25,7 +25,7 @@ class Control:
             "HIST_LIST": ScHistList(),
             "HIST_DETAIL": ScHistDetail(),
         }
-        self.scene: Scene = self.scene_dict["HIST_LIST"]  # Default scene
+        self.scene: Scene = self.scene_dict["MAIN_MENU"]  # Default scene
         self.scene.start()
         self.scene.active = True
 
