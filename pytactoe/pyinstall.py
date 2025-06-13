@@ -4,7 +4,7 @@ PyInstaller.__main__.run([
     "-y",  # force clean.
     "--name=py-tac-toe",
     "--windowed",
-    "--console",
+    "--noconsole",
     "--add-data=assets/*:assets",
     "pytactoe/main.py"
 ])

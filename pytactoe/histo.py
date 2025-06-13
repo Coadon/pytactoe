@@ -1,4 +1,8 @@
+import os
 import sqlite3
+import sys
+
+from appdirs import user_data_dir
 
 from constants import RoundResult
 from record import RoundRecord
@@ -14,11 +18,22 @@ def deserialize_round_result(result) -> (int, bool):
 
 
 # Creates a new database file if it doesn’t exist.
-conn: sqlite3.Connection = sqlite3.connect("rounds.sqlite")
-cur: sqlite3.Cursor = conn.cursor()
+conn: sqlite3.Connection
+cur: sqlite3.Cursor
 
 
 def start():
+    data_dir = user_data_dir("py-tac-toe", "fortpile")
+    os.makedirs(data_dir, exist_ok=True)
+    db_path = os.path.join(data_dir, "rounds.sqlite")
+
+    print("Data directory: ", data_dir)
+    print("Using DB path: ", db_path)
+
+    global conn, cur
+    conn = sqlite3.connect(db_path)
+    cur = conn.cursor()
+
     # Create the table if it doesn't exist
     cur.execute("""
         CREATE TABLE IF NOT EXISTS rounds ( \
