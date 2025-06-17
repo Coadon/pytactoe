@@ -34,7 +34,7 @@ class Text(Drawable):
         self.pos = pos
 
     def update_draw(self, screen: pg.Surface):
-        rendered_text = self.font.render(self.text, True, self.color)
+        rendered_text = self.font.render(self.text, False, self.color)
         self.rect = rendered_text.get_rect(**{"center" if self.centered else "topleft": self.pos})
         screen.blit(rendered_text, self.rect)
 

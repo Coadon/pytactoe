@@ -9,7 +9,7 @@ from gfx.fonts import font
 class ScMainMenu(Scene):
     def __init__(self) -> None:
         super().__init__()
-        self.text = font("BIG").render("Tic Tac Toe", True, (0, 0, 0))
+        self.text = font("BIG").render("Tic Tac Toe", False, (0, 0, 0))
 
         self.btn_timed_game = TextButton((SCREEN_SIZE[0] // 2, SCREEN_SIZE[1] // 2), (300, 30),
                                          "Timed", font("MID"), pg.Color(0, 0, 0),

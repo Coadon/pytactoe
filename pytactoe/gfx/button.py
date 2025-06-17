@@ -25,7 +25,7 @@ class TextButton(Drawable):
         self.update_property()
 
     def update_property(self):
-        self.text_surface = self.font.render(self.text, True, self.color)
+        self.text_surface = self.font.render(self.text, False, self.color)
         self.text_rect = self.text_surface.get_rect(center=self.pos_center)
         self.box_rect = pg.Rect(
             self.text_rect.centerx - self.scale[0] // 2,

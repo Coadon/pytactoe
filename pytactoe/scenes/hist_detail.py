@@ -55,6 +55,7 @@ class ScHistDetail(Scene):
         self.next_scene = "HIST_LIST"
 
     def reset(self):
+        self.grid = [[0 for _ in range(3)] for _ in range(3)]
         self.round = None
 
     def draw(self, screen, dt: float):
